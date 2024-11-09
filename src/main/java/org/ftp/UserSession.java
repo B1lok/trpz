@@ -27,6 +27,7 @@ public class UserSession extends Thread {
     this.dataPort = dataPort;
     this.currDirectory = System.getProperty("user.dir") + "/server";
     this.root = System.getProperty("user.dir");
+    this.state = new NotLoggedState();
   }
 
 
