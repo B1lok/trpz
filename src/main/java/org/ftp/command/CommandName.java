@@ -1,6 +1,8 @@
 package org.ftp.command;
 
-public enum CommandName {;
+public enum CommandName {
+
+  RESTORE("restore");
 
   private final String commandName;
 
