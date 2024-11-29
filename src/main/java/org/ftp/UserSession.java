@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import lombok.Getter;
 import org.ftp.command.CommandResponse;
 import org.ftp.memento.Memento;
 import org.ftp.memento.SnapshotHistory;
@@ -20,6 +21,7 @@ public class UserSession extends Thread {
   private PrintWriter controlOutWriter;
   private int dataPort;
   private String root;
+  @Getter
   private String currDirectory;
   private boolean quitCommandLoop = false;
 
@@ -59,6 +61,14 @@ public class UserSession extends Thread {
       } catch (IOException e) {
       }
     }
+  }
+
+  public void setCurrDirectory(String currDirectory) {
+    this.currDirectory = currDirectory;
+  }
+
+  public void setQuitCommandLoop(boolean quitCommandLoop) {
+    this.quitCommandLoop = quitCommandLoop;
   }
 
   public void saveSnapshot() {
