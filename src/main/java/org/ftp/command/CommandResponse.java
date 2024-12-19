@@ -12,7 +12,10 @@ public class CommandResponse {
 
   @Override
   public String toString() {
-    return code + " " + message;
+    if (message.split("\n").length > 1)
+      return code + "-" + message + "\n" + code + " End of response";
+    else
+      return code + " " + message;
   }
 
   public static class Builder {

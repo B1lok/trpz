@@ -15,6 +15,7 @@ public abstract class CommandProcessor {
     try {
       return process(session, args);
     } catch (Exception e) {
+      System.out.println(e.getMessage());
       return new CommandResponse.Builder().withCode(500).withMessage("An error occurred.").build();
     }
   }

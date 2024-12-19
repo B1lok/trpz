@@ -15,6 +15,8 @@ public class LoggedState implements SessionState {
 
   @Override
   public CommandResponse handleCommand(UserSession session, String command) {
-    return commandContainer.retrieveCommand(command).execute(session, null);
+    return commandContainer
+        .retrieveCommand(command.trim().split(" ")[0])
+        .execute(session, command.trim().split(" "));
   }
 }

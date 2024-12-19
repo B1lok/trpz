@@ -7,9 +7,9 @@ import java.util.Set;
 public class Permission {
   public enum Access { READ, WRITE, EXECUTE }
 
-  private Set<Access> ownerPermissions;
-  private Set<Access> groupPermissions;
-  private Set<Access> othersPermissions;
+  private final Set<Access> ownerPermissions;
+  private final Set<Access> groupPermissions;
+  private final Set<Access> othersPermissions;
 
   public Permission(int octal) {
     ownerPermissions = parsePermissions(octal / 100);
@@ -25,17 +25,32 @@ public class Permission {
     return permissions;
   }
 
-  public boolean hasAccess(User user, int ownerId, int groupId, List<Group> userGroups, Access access) {
+  public boolean hasAccess(User user, int ownerId, Integer groupId, List<Group> userGroups, Access access) {
     if (ownerId == user.getId()) {
       return ownerPermissions.contains(access);
     }
 
-    for (Group group : userGroups) {
-      if (group.getId() == groupId) {
-        return groupPermissions.contains(access);
+    if (groupId != null){
+      for (Group group : userGroups) {
+        if (group.getId() == groupId) {
+          return groupPermissions.contains(access);
+        }
       }
     }
 
     return othersPermissions.contains(access);
+  }
+  public int toOctal() {
+    return calculatePermissions(ownerPermissions) * 100 +
+        calculatePermissions(groupPermissions) * 10 +
+        calculatePermissions(othersPermissions);
+  }
+
+  private int calculatePermissions(Set<Access> permissions) {
+    int value = 0;
+    if (permissions.contains(Access.READ)) value += 4;
+    if (permissions.contains(Access.WRITE)) value += 2;
+    if (permissions.contains(Access.EXECUTE)) value += 1;
+    return value;
   }
 }
