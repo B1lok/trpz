@@ -49,15 +49,18 @@ public class StatCommandProcessor extends CommandProcessor {
           .withMessage("No connection statistics found for user " + username + ".")
           .build();
     }
-    StringBuilder responseMessage = new StringBuilder("Last connections for user ").append(username).append(":\n");
+    StringBuilder responseMessage = new StringBuilder("Last connections for user ").append(username)
+        .append(":\n");
     responseMessage.append(String.format("%-30s %-30s\n", "Connection Time", "Disconnection Time"));
     responseMessage.append("------------------------------------------------------------\n");
 
     for (ConnectionStatistics stats : connectionStatistics) {
-      String connectionTime = stats.getConnectionTime() != null ? stats.getConnectionTime().toString() : "N/A";
-      String disconnectionTime = stats.getDisconnectionTime() != null ? stats.getDisconnectionTime().toString() : "N/A";
+      String connectionTime =
+          stats.getConnectionTime() != null ? stats.getConnectionTime().toString() : "N/A";
+      String disconnectionTime =
+          stats.getDisconnectionTime() != null ? stats.getDisconnectionTime().toString() : "N/A";
       responseMessage.append(String.format("%-20s %-20s\n",
-           connectionTime, disconnectionTime));
+          connectionTime, disconnectionTime));
     }
 
     return new CommandResponse.Builder()

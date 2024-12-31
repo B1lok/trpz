@@ -12,7 +12,8 @@ public class FileSystemUtils {
   public static final String ROOT_DIRECTORY = "~";
 
   public static String getServerBasePath() {
-    return System.getProperty("user.dir");
+//    return System.getProperty("user.dir");
+    return "/ftp-data";
   }
 
   public static int getServerRootId() {

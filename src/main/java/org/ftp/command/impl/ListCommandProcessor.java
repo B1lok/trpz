@@ -15,7 +15,6 @@ import org.ftp.repository.RepositoryFactory;
 import org.ftp.repository.impl.DirectoryRepository;
 import org.ftp.repository.impl.FileRepository;
 import org.ftp.repository.impl.UserRepository;
-import org.ftp.util.FileSystemUtils;
 import org.ftp.visitor.PermissionCheckVisitor;
 
 public class ListCommandProcessor extends CommandProcessor {

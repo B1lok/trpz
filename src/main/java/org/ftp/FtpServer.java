@@ -16,7 +16,7 @@ public class FtpServer {
   private static final Logger LOGGER = Logger.getLogger(FtpServer.class.getName());
 
   private static final int CONTROL_PORT = 21;
-  private static final int START_DATA_PORT = 1324;
+  private static final int START_DATA_PORT = 1024;
   private static final int THREAD_POOL_SIZE = 10;
   private static final AtomicInteger MAX_CONNECTIONS = new AtomicInteger(10);
   private final AtomicInteger activeConnections = new AtomicInteger(0);

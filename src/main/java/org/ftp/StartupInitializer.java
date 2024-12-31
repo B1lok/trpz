@@ -19,6 +19,7 @@ import org.ftp.repository.impl.DirectoryRepository;
 import org.ftp.repository.impl.GlobalLimitsRepository;
 import org.ftp.repository.impl.GroupRepository;
 import org.ftp.repository.impl.UserRepository;
+import org.ftp.util.FileSystemUtils;
 
 public class StartupInitializer {
 
@@ -28,7 +29,10 @@ public class StartupInitializer {
     GlobalLimitsRepository globalLimitsRepository = RepositoryFactory.getGlobalLimitsRepository();
     GroupRepository groupRepository = RepositoryFactory.getGroupRepository();
     DirectoryRepository directoryRepository = RepositoryFactory.getDirectoryRepository();
-
+    if (!userRepository.readAll().isEmpty()) {
+      System.out.println("Server already initialized.");
+      return;
+    }
     // Create admin user
     User admin = createAdminUser(userRepository);
 
@@ -110,7 +114,7 @@ public class StartupInitializer {
   }
 
   public static void initializeFileSystemDirectories() {
-    Path serverPath = Paths.get(System.getProperty("user.dir"), "server");
+    Path serverPath = Paths.get(FileSystemUtils.getServerBasePath(), "server");
     Path rootPath = serverPath.resolve("root");
     Path homePath = serverPath.resolve("home");
     Path adminHomePath = homePath.resolve("admin");
