@@ -4,5 +4,5 @@ public interface Repository<T, K> {
   T readById(K id);
   T create(T entity);
   T update(T entity);
-  T delete(T entity);
+  void delete(K id);
 }
